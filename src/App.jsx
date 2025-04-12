@@ -6,6 +6,7 @@ import GNB from "@/components/GNB";
 import { WinSizeProvider } from "./contexts/winSizeContext";
 import Login from "./pages/sign/LogIn";
 import AddItem from "./pages/additem";
+import ItemDetail from "./pages/items/itemDetail";
 
 function App() {
   return (
@@ -17,9 +18,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/items" element={<Items />}>
-              {/* <Route index element={<Items />} /> */}
-            </Route>
+            <Route path="/items" element={<Items />}></Route>
+            <Route path="/items/:id" element={<ItemDetail />} />
             <Route path="/additem" element={<AddItem />} />
           </Routes>
         </BrowserRouter>

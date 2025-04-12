@@ -5,12 +5,18 @@ import OrderArrow from "@/assets/icons/ico_arrow_down.svg";
 import Magnify from "@/assets/icons/ico_magnify.svg";
 import Order from "@/assets/icons/ico_order.svg";
 import Button from "@/components/Button";
+import Selector from "../../../../components/Selector";
 
 function TitleBar({ winSize, keywords, pages, orders }) {
   const [showOrder, setShowOrder] = useState(false);
   const [keyword, setKeyword] = keywords;
   const [page, setPage] = pages;
   const [order, setOrder] = orders;
+
+  const ORDER_LIST = {
+    recent: "최신순",
+    favorite: "좋아요순",
+  };
 
   const search = (e) => {
     setKeyword(e.target.value);
@@ -46,10 +52,11 @@ function TitleBar({ winSize, keywords, pages, orders }) {
             >
               <img src={Order} alt="" />
               {showOrder && (
-                <ul>
-                  <li onClick={() => setOrder("recent")}>최신순</li>
-                  <li onClick={() => setOrder("favorite")}>좋아요순</li>
-                </ul>
+                <Selector
+                  options={Object.values(ORDER_LIST)}
+                  setter={setOrder}
+                  setterOptions={Object.keys(ORDER_LIST)}
+                />
               )}
             </div>
           </div>
@@ -74,13 +81,14 @@ function TitleBar({ winSize, keywords, pages, orders }) {
             className="select-order"
             onClick={() => setShowOrder((prev) => !prev)}
           >
-            <span>{order === "recent" ? "최신순" : "좋아요순"}</span>
+            <span>{ORDER_LIST[order]}</span>
             <img src={OrderArrow} alt="" />
             {showOrder && (
-              <ul>
-                <li onClick={() => setOrder("recent")}>최신순</li>
-                <li onClick={() => setOrder("favorite")}>좋아요순</li>
-              </ul>
+              <Selector
+                options={Object.values(ORDER_LIST)}
+                setter={setOrder}
+                setterOptions={Object.keys(ORDER_LIST)}
+              />
             )}
           </div>
         </>

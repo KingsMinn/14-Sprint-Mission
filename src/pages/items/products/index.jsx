@@ -7,6 +7,7 @@ import * as S from "./style";
 import Empty from "@/assets/images/img_empty.svg";
 import TitleBar from "./TitleBar";
 import Pagination from "./Pagination/Pagination";
+import { Link } from "react-router-dom";
 
 const getQuantity = (winSize) => {
   if (winSize === "mobile") {
@@ -47,15 +48,17 @@ function Products() {
       <S.ProductsContainer>
         {articles.length ? (
           articles.map((e) => (
-            <Card
-              name={e.name}
-              price={e.price}
-              favoriteCount={e.favoriteCount}
-              images={e.images[0]}
-              isLoading={isLoading}
-              width={winSize === "mobile" ? "152px" : undefined}
-              height={winSize === "mobile" ? "262px" : undefined}
-            />
+            <Link to={`/items/${e.id}`}>
+              <Card
+                name={e.name}
+                price={e.price}
+                favoriteCount={e.favoriteCount}
+                images={e.images[0]}
+                isLoading={isLoading}
+                width={winSize === "mobile" ? "152px" : undefined}
+                height={winSize === "mobile" ? "262px" : undefined}
+              />
+            </Link>
           ))
         ) : (
           <div className="notFound">
